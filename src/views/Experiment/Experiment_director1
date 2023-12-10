@@ -1,0 +1,58 @@
+<template>
+    <ContentBase>
+        <div>
+            <h1 class="mb-4">用户名</h1>
+            <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">序号</th>
+                <th scope="col">项目名称</th>
+                <th scope="col">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td>1</td>
+                <td>项目1</td>
+                <td><button type="button" class="btn btn-primary" @click="replacePage">手动分解</button></td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td>2</td>
+                <td>项目2</td>
+                <td><button type="button" class="btn btn-primary" @click="replacePage">手动分解</button></td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td>3</td>
+                <td>项目3</td>
+                <td><button type="button" class="btn btn-primary" @click="replacePage">手动分解</button></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </ContentBase>
+    
+    </template>
+    
+    <script >
+    import ContentBase from '@/components/ContentBase'
+    export default {
+        name: "ExperimentDirector1",
+        components: {
+            ContentBase
+        },
+    methods:{
+        replacePage(){
+                    this.$router.push('/experimentdepartment/director2/')
+                },
+    
+        }
+    }
+    
+    </script>
+    
+    <style scoped>
+    </style>
