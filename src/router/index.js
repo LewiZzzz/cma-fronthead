@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Quality_CreateProject from '@/views/Quality/Quality_CreateProject'
-import Quality_adada from '@/views/Quality/Quality_adada'
+import Quality_Project from '@/views/Quality/Quality_Project'
 
 const routes = [
   {
@@ -15,9 +15,12 @@ const routes = [
     component: Quality_CreateProject,
   },
   {
-    path: '/qualitydepartment/create/',
-    name: 'create',
-    component: Quality_adada,
+    path: '/qualitydepartment/project/',
+    name: 'project',
+    component: Quality_Project,
+  },
+  {
+
   }
 ]
 

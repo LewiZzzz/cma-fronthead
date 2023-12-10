@@ -53,8 +53,8 @@ export default {
                         link: '/qualitydepartment/createproject/'
                     },
                     {
-                        name: '创建',
-                        link: '/qualitydepartment/create/'
+                        name: '查看项目',
+                        link: '/qualitydepartment/project/'
                     }
                     // 导航项数组针对角色2
                 ],
