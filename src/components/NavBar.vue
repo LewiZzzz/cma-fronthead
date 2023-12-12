@@ -83,6 +83,13 @@ export default {
                     },
                     // 导航项数组针对角色3
                 ],
+                [
+                    {
+                        name:'提交任务',
+                        link:'/experiment/submitask/'
+                    },
+                    //导航向数组针对角色4，实验科人员
+                ]
             ],
         };
     },
