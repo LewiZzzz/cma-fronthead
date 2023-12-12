@@ -5,9 +5,14 @@ import Quality_Project from '@/views/Quality/Quality_Project'
 import Quality_StandardList from '@/views/Quality/Quality_StandardList'
 import Experiment_director1 from '@/views/Experiment/Experiment_director1'
 import Experiment_director2 from '@/views/Experiment/Experiment_director2'
+<<<<<<< HEAD
 import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
 import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
 
+=======
+import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
+import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
+>>>>>>> 45797451073b0d291dc932a8c21e94d32ae14731
 
 const routes = [
   {

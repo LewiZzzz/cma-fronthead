@@ -32,7 +32,11 @@ export default {
     },
     data() {
         return {
+<<<<<<< HEAD
             roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员'], // 根据角色对应名称的数组
+=======
+            roleNames: ['系统管理员', '质量科', '实验科主任'], // 根据角色对应名称的数组
+>>>>>>> 45797451073b0d291dc932a8c21e94d32ae14731
             navigationItems: [
                 [
                     {
@@ -70,10 +74,18 @@ export default {
                         link: '/experiment/querytask/'
                     },
                     {
+<<<<<<< HEAD
                         name: '任务审核',
                         link: '/experiment/taskexamine/'
                     },
                     {
+=======
+                        name: '任务审核（主任）',
+                        link: '/experiment/taskexamine/'
+                    },
+                   
+                {
+>>>>>>> 45797451073b0d291dc932a8c21e94d32ae14731
                         name: '项目分解',
                         link: '/experimentdepartment/director1/'
                     },
