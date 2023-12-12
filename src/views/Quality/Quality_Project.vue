@@ -25,8 +25,13 @@
                 <el-row>
                     <el-table :data="projects" style="width: 100%">
                         <el-table-column label="项目开始日期" prop="date" />
-                        <el-table-column label="项目参数数量" prop="paramSize" />
+                        <el-table-column label="项目标准数量" prop="paramSize" />
                         <el-table-column label="项目名称" prop="name" />
+                        <el-table-column label="项目标准">
+                            <template #default="scope">
+                                <p v-for="(s) in scope.row.standard" :key="s.id">{{ s.name }}</p>
+                            </template>
+                        </el-table-column>
                         <el-table-column label="项目负责人" prop="principal" />
                         <el-table-column label="项目进度">
                             <template #default="scope">
@@ -46,7 +51,8 @@
                                 </el-button>
                                 <el-button size="small" type="success" v-if="scope.row.state === 0">导出表格</el-button>
                                 <el-button size="small" type="info" v-if="scope.row.state === 1" data-bs-toggle="modal"
-                                    data-bs-target="#projectProgressModal" @click="openModal(scope.row)">查看项目进度</el-button>
+                                    data-bs-target="#projectStandardListModal"
+                                    @click="openModal(scope.row)">查看项目进度</el-button>
                                 <el-button size="small" type="warning" v-if="scope.row.state === 2">审核</el-button>
                             </template>
                         </el-table-column>
@@ -55,46 +61,66 @@
             </el-form>
         </el-main>
 
-        <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+        <div class="modal fade" id="projectStandardListModal" tabindex="-1" aria-labelledby="projectStandardListModal"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="projectModalLabel">项目详情</h5>
+                        <h5 class="modal-title" id="projectModalLabel">项目标准列表</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- 在这里展示项目的详细信息 -->
-                        <p>日期: {{ selectedProject.date }}</p>
-                        <p>项目名称: {{ selectedProject.name }}</p>
-                        <p>项目状态: {{ selectedProject.state === 0 ? '已完成' : (selectedProject.state === 1 ? '未完成' : '待审核') }}
-                        </p>
-                        <el-progress :percentage="this.selectedProject.progress" />
+                        <el-row :gutter="12" v-for="(item) in this.selectedProject.standard" :key="item.id" class="mb-3">
+                            <el-col :span="24">
+                                <el-card shadow="hover">
+                                    <el-container>
+                                        <el-aside width="350px">
+                                            <el-text size="large">{{ item.name }}</el-text>
+                                            <br>
+                                            <el-text>大类名称：{{ item.class }}</el-text>
+                                            <br>
+                                            <el-text>类别名称：{{ item.subclass }}</el-text>
+                                            <br>
+                                            <el-text size="small">标准编号：{{ item.number }}</el-text>
+                                            <br>
+                                            <el-text size="small">限制范围：{{ item.restrictRange }}</el-text>
+                                            <br>
+                                            <el-text size="small">补充说明：{{ item.instruction }}</el-text>
+                                            <br>
+                                            <el-text size="small">提交者：{{ item.submitter }}</el-text>
+                                            <br>
+                                            <el-text size="small">提交时间：{{ item.submitTime }}</el-text>
+                                            <br>
+                                            <el-progress :text-inside="true" :stroke-width="26"
+                                                :percentage="item.progress" />
+                                        </el-aside>
+                                        <el-main><el-button type="primary" :icon="Search" circle
+                                                @click="selectStandard(item)" data-bs-toggle="modal"
+                                                data-bs-target="#projectParmModal" /></el-main>
+                                    </el-container>
+                                </el-card>
+                            </el-col>
+                        </el-row>
                     </div>
                     <div class="modal-footer">
+
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="projectProgressModal" tabindex="-1" aria-labelledby="projectModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="projectParmModal" tabindex="-1" aria-labelledby="projectParmModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="projectModalLabel">项目详情</h5>
+                        <h5 class="modal-title" id="projectModalLabel">标准导航框</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- 在这里展示项目的详细信息 -->
-                        <p>日期: {{ this.selectedProject.date }}</p>
-                        <p>项目名称: {{ this.selectedProject.name }}</p>
-                        <p>项目状态: {{ selectedProject.state === 0 ? '已完成' : (selectedProject.state === 1 ? '未完成' : '待审核') }}
-                        </p>
-                        <el-progress :percentage="this.selectedProject.progress" />
                         <p>项目参数：</p>
                         <ul>
-                            <li v-for="(param) in selectedProject.param" :key="param.id">
+                            <li v-for="(param) in this.selectedStandard.params" :key="param.id" class="mb-3">
                                 <span class="me-2">{{ param.name }}</span>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#paramDetailModal" @click="openParam(param)">
@@ -104,6 +130,8 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#projectStandardListModal">返回</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     </div>
                 </div>
@@ -120,21 +148,6 @@
                     <div class="modal-body">
                         <!-- 展示参数的详细信息 -->
                         <p>参数序号: {{ this.selectedParam.num }}</p>
-                        <el-tag v-if="this.selectedParam.standard.state == 0" type="success">已完成</el-tag>
-                        <el-tag v-if="this.selectedParam.standard.state == 1" type="danger">未完成</el-tag>
-                        <br>
-                        <p>依据标准详细信息</p>
-                        <p>大类序号: {{ this.selectedParam.standard.classId }}</p>
-                        <p>大类名称: {{ this.selectedParam.standard.class }}</p>
-                        <p>类别序号: {{ this.selectedParam.standard.subclassId }}</p>
-                        <p>类别名称: {{ this.selectedParam.standard.subclass }}</p>
-                        <p>标准名称: {{ this.selectedParam.standard.name }}</p>
-                        <p>标准编号：{{ this.selectedParam.standard.number }}</p>
-                        <p>限制范围: {{ this.selectedParam.standard.restrictRange }}</p>
-                        <p>补充说明: {{ this.selectedParam.standard.instruction }}</p>
-                        <p>提交者: {{ this.selectedParam.standard.submitter }}</p>
-                        <p>提交时间: {{ this.selectedParam.standard.submitTime }}</p>
-                        <br>
                         <p>具体要求详细信息</p>
                         <p><span>人员</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
                                 data-bs-target="#paramInstrumentModal">查看详细信息</button></p>
@@ -163,7 +176,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#projectProgressModal">返回</button>
+                            data-bs-target="#projectParmModal">返回</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     </div>
                 </div>
@@ -552,14 +565,14 @@ import {
     ref
 } from 'vue';
 import {
-    Search
+    Search,
+    Edit
 } from '@element-plus/icons-vue'
 
 export default {
     name: "QualityCreate",
     components: {
         ContentBase,
-        Search
     },
     setup() {
         const form = ref({
@@ -586,6 +599,7 @@ export default {
                     subclass: "外科金属植入物 表面质量", // 标准具体类别（子类）
                     restrictRange: "限制范围", //限制范围
                     instruction: "", // 补充说明
+                    progress: 50,
                     params:
                         [
                             //第一个参数
@@ -1060,6 +1074,8 @@ export default {
             projects,
             activeNames,
             handleChange,
+            Search,
+            Edit
         };
     },
     data() {
@@ -1073,6 +1089,9 @@ export default {
                 paramSize: 0,
                 principal: '',
             }, // 用于存储被选中项目的详细信息
+            selectedStandard: {
+
+            },
             selectedParam: {
                 id: 0, //参数唯一标识
                 name: "",
@@ -1154,6 +1173,10 @@ export default {
             this.selectedProject = Object.assign({}, project);
             console.log(this.selectedProject.param);
         },
+        selectStandard(standard) {
+            this.selectedStandard = Object.assign({}, standard);
+            console.log(this.selectedStandard)
+        },
         openParam(param) {
             this.selectedParam = Object.assign({}, param);
         },
@@ -1162,4 +1185,18 @@ export default {
         }
     },
 }
+
 </script>
+
+<style scoped>
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-content {
+    /* 保持内容在左侧 */
+    flex-grow: 1;
+}
+</style>

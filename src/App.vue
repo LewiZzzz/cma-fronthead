@@ -1,7 +1,7 @@
 <template>
   <NavBar :role=1>
   </NavBar>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
@@ -14,12 +14,11 @@ export default {
   name: "App",
   components: {
     NavBar: NavBar,
-  }  
+  }
 }
 </script>
 
 <style>
-
 @font-face {
   font-family: '未来荧黑';
   /* 字体名称 */
@@ -32,6 +31,4 @@ export default {
   font-family: '未来荧黑', Arial, sans-serif;
   font-weight: 500;
 }
-
-
 </style>

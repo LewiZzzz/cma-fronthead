@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            roleNames: ['系统管理员', '质量科', '角色3名称'], // 根据角色对应名称的数组
+            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员'], // 根据角色对应名称的数组
             navigationItems: [
                 [
                     {
@@ -65,7 +65,15 @@ export default {
                     // 导航项数组针对角色2
                 ],
                 [
-                {
+                    {
+                        name: '查看任务',
+                        link: '/experiment/querytask/'
+                    },
+                    {
+                        name: '任务审核',
+                        link: '/experiment/taskexamine/'
+                    },
+                    {
                         name: '项目分解',
                         link: '/experimentdepartment/director1/'
                     },

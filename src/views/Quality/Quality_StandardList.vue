@@ -68,15 +68,15 @@
 
 <script>
 import ContentBase from '@/components/ContentBase'
-import {
-    Search
-} from '@element-plus/icons-vue'
+// import {
+//     Search
+// } from '@element-plus/icons-vue'
 
 export default {
     name: "QualityStandardList",
     components: {
         ContentBase,
-        Search,
+
     }
 }
 </script>
