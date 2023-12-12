@@ -7,6 +7,7 @@ import Experiment_director1 from '@/views/Experiment/Experiment_director1'
 import Experiment_director2 from '@/views/Experiment/Experiment_director2'
 import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
 import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
+import Experiment_SubmitTask from '@/views/Experiment/Experiment_SubmitTask'
 
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
     path: '/experiment/taskexamine/',
     name: 'taskExamine',
     component: Experiment_TaskExamine,
+  },
+  {
+    path: '/experiment/submitask/',
+    name: 'submitTask',
+    component: Experiment_SubmitTask,
   },
 ]
 
