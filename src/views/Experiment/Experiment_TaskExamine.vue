@@ -14,6 +14,12 @@
       </template>
     </el-table-column>
     </el-table>
+    <template>
+      <div class="example-pagination-block">
+      <div class="example-demonstration">When you have more than 7 pages</div>
+      <el-pagination layout="prev, pager, next" :total="1000" />
+      </div>
+    </template>
   </ContentBase>
 </template>
  <script>
@@ -27,6 +33,7 @@
      return {
       tableData1:[
                     {id:1,name:1,parameter:1,file:1,staff:1,status:1},
+                    {id:2,name:2,parameter:2,file:2,staff:2,status:2},
                     
       ],
        creationMethod: true, // 用于单选选择从界面输入还是从Excel输入
