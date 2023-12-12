@@ -31,7 +31,17 @@ const routes = [
     path: '/experimentdepartment/director2/',
     name: 'director2',
     component: Experiment_director2,
-  }
+  },
+  {
+    path: '/experiment/querytask/',
+    name: 'queryTask',
+    component: Experiment_QueryTask,
+  },
+  {
+    path: '/experiment/taskexamine/',
+    name: 'taskExamine',
+    component: Experiment_TaskExamine,
+  },
 ]
 
 const router = createRouter({
