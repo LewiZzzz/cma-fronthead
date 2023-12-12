@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Quality_CreateProject from '@/views/Quality/Quality_CreateProject'
 import Quality_Project from '@/views/Quality/Quality_Project'
+import Quality_StandardList from '@/views/Quality/Quality_StandardList'
 
 const routes = [
   {
@@ -20,7 +21,9 @@ const routes = [
     component: Quality_Project,
   },
   {
-
+    path: '/qualitydepartment/standardlist',
+    name: 'standardlist',
+    component: Quality_StandardList,
   }
 ]
 
