@@ -5,7 +5,7 @@
             <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">状态</th>
                 <th scope="col">序号</th>
                 <th scope="col">项目名称</th>
                 <th scope="col">操作</th>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row"></th>
+                <th scope="row">分解中</th>
                 <td>1</td>
                 <td>项目1</td>
                 <td><button type="button" class="btn btn-primary" @click="replacePage">手动分解</button></td>
