@@ -59,9 +59,9 @@ export default {
                     // 导航项数组针对角色2
                 ],
                 [
-                    {
-                        name: '选项1',
-                        link: '/option1'
+                {
+                        name: '项目分解',
+                        link: '/experimentdepartment/director1/'
                     },
                     {
                         name: '选项2',
