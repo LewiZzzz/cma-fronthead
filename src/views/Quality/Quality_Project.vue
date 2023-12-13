@@ -150,7 +150,7 @@
                         <p>参数序号: {{ this.selectedParam.num }}</p>
                         <p>具体要求详细信息</p>
                         <p><span>人员</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramInstrumentModal">查看详细信息</button></p>
+                                data-bs-target="#paramPersonnelModal">查看详细信息</button></p>
                         <p><span>设备</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
                                 data-bs-target="#paramInstrumentModal">查看详细信息</button></p>
                         <p><span>样品</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
