@@ -596,10 +596,9 @@ export default {
                     classId: 1, // 大类序号
                     class: "物理性能通用要求及参数", // 标准大类
                     subclassId: 1, //类别序号 x.y x是大类序号 y是具体类别  其实类别序号可以唯一确定项目标识 但是保险起见还是加一个id
-                    subclass: "外科金属植入物 表面质量", // 标准具体类别（子类）
+                    subclass: "金属材料", // 标准具体类别（子类）
                     restrictRange: "限制范围", //限制范围
                     instruction: "", // 补充说明
-                    progress: 50,
                     params:
                         [
                             //第一个参数
@@ -906,7 +905,7 @@ export default {
                     classId: 1, // 大类序号
                     class: "物理性能通用要求及参数", // 标准大类
                     subclassId: 2, //类别序号 x.y x是大类序号 y是具体类别  其实类别序号可以唯一确定项目标识 但是保险起见还是加一个id
-                    subclass: "外科金属植入物 表面质量", // 标准具体类别（子类）
+                    subclass: "金属材料", // 标准具体类别（子类）
                     restrictRange: "限制范围", //限制范围
                     instruction: "", // 补充说明
                     params:
@@ -916,6 +915,3300 @@ export default {
                                 id: 2, //参数唯一标识
                                 name: "硬度",
                                 num: 1, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                        ],
+                },
+                {
+                    id: 3, // 标准唯一标识
+                    name: "外科金属植入物液体渗透检测",
+                    number: "YY/T 0343-2002", // 标准编号
+                    state: 1, // 标准状态 0 - 已完成 1 - 未完成
+                    classId: 1, // 大类序号
+                    class: "物理性能通用要求及参数", // 标准大类
+                    subclassId: 3, //类别序号 x.y x是大类序号 y是具体类别  其实类别序号可以唯一确定项目标识 但是保险起见还是加一个id
+                    subclass: "外科金属植入物 表面质量", // 标准具体类别（子类）
+                    restrictRange: "限制范围", //限制范围
+                    instruction: "", // 补充说明
+                    params:
+                        [
+                            //第一个参数
+                            {
+                                id: 3, //参数唯一标识
+                                name: "着色渗透",
+                                num: 1, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                        ],
+                },
+                {
+                    id: 4, // 标准唯一标识
+                    name: "医用气体和液体用小孔径连接件 第3部分：胃肠道应用连接件",
+                    number: "YY/T 0916.3-2022", // 标准编号
+                    state: 1, // 标准状态 0 - 已完成 1 - 未完成
+                    classId: 1, // 大类序号
+                    class: "物理性能通用要求及参数", // 标准大类
+                    subclassId: 4, //类别序号 x.y x是大类序号 y是具体类别  其实类别序号可以唯一确定项目标识 但是保险起见还是加一个id
+                    subclass: "医用气体和液体用小孔径连接件 胃肠道应用连接件", // 标准具体类别（子类）
+                    restrictRange: "限制范围", //限制范围
+                    instruction: "", // 补充说明
+                    params:
+                        [
+                            //第一个参数
+                            {
+                                id: 4, //参数唯一标识
+                                name: "压力衰减泄漏",
+                                num: 1, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 5, //参数唯一标识
+                                name: "正压液体泄漏",
+                                num: 2, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 6, //参数唯一标识
+                                name: "应力开裂",
+                                num: 3, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 7, //参数唯一标识
+                                name: "抗轴向负载分离",
+                                num: 4, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 8, //参数唯一标识
+                                name: "抗旋开扭矩分离",
+                                num: 5, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 9, //参数唯一标识
+                                name: "抗过载（滑丝）",
+                                num: 6, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 10, //参数唯一标识
+                                name: "旋开分离",
+                                num: 7, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                        ],
+                },
+                {
+                    id: 5, // 标准唯一标识
+                    name: "医用气体和液体用小孔径连接件 第20部分：通用试验方法",
+                    number: "YY/T 0916.20-2019", // 标准编号
+                    state: 1, // 标准状态 0 - 已完成 1 - 未完成
+                    classId: 1, // 大类序号
+                    class: "物理性能通用要求及参数", // 标准大类
+                    subclassId: 5, //类别序号 x.y x是大类序号 y是具体类别  其实类别序号可以唯一确定项目标识 但是保险起见还是加一个id
+                    subclass: "医用气体和液体用小孔径连接件", // 标准具体类别（子类）
+                    restrictRange: "限制范围", //限制范围
+                    instruction: "", // 补充说明
+                    params:
+                        [
+                            //第一个参数
+                            {
+                                id: 11, //参数唯一标识
+                                name: "压力衰减泄漏试验方法",
+                                num: 1, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 12, //参数唯一标识
+                                name: "正压液体滴落泄漏试验方法",
+                                num: 2, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 13, //参数唯一标识
+                                name: "负压空气泄漏试验方法",
+                                num: 3, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 14, //参数唯一标识
+                                name: "应力开裂试验方法",
+                                num: 4, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 15, //参数唯一标识
+                                name: "抗轴向负载分离试验方法",
+                                num: 5, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 16, //参数唯一标识
+                                name: "抗旋开扭矩分离试验方法",
+                                num: 6, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 17, //参数唯一标识
+                                name: "抗过载（滑丝）试验方法",
+                                num: 7, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 18, //参数唯一标识
+                                name: "旋开分离试验方法",
+                                num: 8, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                        ],
+                },
+                {
+                    id: 6, // 标准唯一标识
+                    name: "非血管内导管 第1部分：一般性能试验方法",
+                    number: "GB/T 15812.1-2005", // 标准编号
+                    state: 1, // 标准状态 0 - 已完成 1 - 未完成
+                    classId: 1, // 大类序号
+                    class: "物理性能通用要求及参数", // 标准大类
+                    subclassId: 6, //类别序号 x.y x是大类序号 y是具体类别  其实类别序号可以唯一确定项目标识 但是保险起见还是加一个id
+                    subclass: "非血管内导管", // 标准具体类别（子类）
+                    restrictRange: "限制范围", //限制范围
+                    instruction: "", // 补充说明
+                    params:
+                        [
+                            //第一个参数
+                            {
+                                id: 19, //参数唯一标识
+                                name: "金属部件的耐腐蚀性试验方法",
+                                num: 1, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 20, //参数唯一标识
+                                name: "拉伸性能试验方法",
+                                num: 2, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 21, //参数唯一标识
+                                name: "耐液压泄漏试验方法",
+                                num: 3, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 22, //参数唯一标识
+                                name: "耐吸引或真空泄漏试验方法",
+                                num: 4, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 23, //参数唯一标识
+                                name: "测定导管水流量试验方法",
+                                num: 5, //参数序号
+                                //人员
+                                personnel: {
+                                    state: 0, //0 - 已完成， 1 - 未完成
+                                    personnels: [{
+                                        id: 0,
+                                        name: "张三", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    {
+                                        id: 1,
+                                        name: "李四", //人员姓名
+                                        tel: "123456789", //电话号码
+                                        trainingSituation: "通过", //培训情况
+                                        assessmentData: {
+                                            name: "考核资料名称",
+                                            url: "考核资料链接",
+                                        },
+                                        authorization: {
+                                            name: "授权批准名称",
+                                            url: "授权批准pdf连接",
+                                        },
+                                    },
+                                    ],
+                                    submitter: "赵六", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设备
+                                instrument: {
+                                    state: 0,// 0 - 未完成 1 - 已完成
+                                    submitter: "", // 提交者
+                                    submitTime: "", // 提交时间
+                                    id: 0, // 检测仪器唯一标识
+                                    number: "GW015", // 检测仪器编号
+                                    name: "标准渗透样块", // 检测仪器名称
+                                    modelType: "B5", // 检测仪器型号
+                                    measuringRange: "中灵敏度-超灵敏度", // 检测仪器测量范围
+                                    traceMode: "其他方式", //溯源方式
+                                    effectiveDate: "2027-6-25", //有效日期
+                                    purchaseYear: 2021, // 购买年份
+                                    resource: "自购", // 购买方式
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    }, // 计量证书pdf链接
+                                    operatingInstruction: { //操作说明
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    authorizedUserList: {
+                                        name: "excel名称", // 仪器授权用户列表excel名称
+                                        url: "excelurl",
+                                    },
+                                },
+                                //样品
+                                sample: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    name: "样本名称",
+                                    sampleType: "样本型号",
+                                    sampleBatchNumber: "样本批号",
+                                    samplePrincipal: "样本负责人",
+                                    samplePhoto: "照片", //照片url
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // SOP 检验细则
+                                SOP: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "检验细则名称",
+                                        url: "检验细则url",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 设施
+                                facility: {
+                                    isRequired: 1, // 0为无特殊要求，无需链接证明 1是测试房间有要求，需要链接证明文件
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 比对验证
+                                verification: {
+                                    // 比对验证
+                                    isRequired: 1, // 默认0为无要求 1为有要求，需要链接比对/验证结果PDF
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    certificate: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                },
+                                // 模拟实验
+                                simulationExperiment: {
+                                    state: 0, // 0 - 已完成 1 - 未完成
+                                    labReport: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    SourceRecord: {
+                                        name: "pdf名称",
+                                        url: "pdfurl",
+                                    },
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "ABC", // 提交时间
+                                },
+                                // 项目额外要求
+                                extraRequirement: [{
+                                    state: 0,
+                                    //要求名称
+                                    name: '额外要求',
+                                    //要求内容、说明
+                                    content: '额外内容要求',
+                                    //要求附件
+                                    attachments: [
+                                        {
+                                            id: 0,  // 附件id
+                                            //附件名称
+                                            name: '附件名称',
+                                            //附件链接
+                                            url: '链接',
+                                        },
+                                    ],
+                                    submitter: "ABC", // 提交者
+                                    submitTime: "", // 提交时间
+                                }],
+                            },
+                            //第一个参数
+                            {
+                                id: 24, //参数唯一标识
+                                name: "连接器牢固度试验方法",
+                                num: 6, //参数序号
                                 //人员
                                 personnel: {
                                     state: 0, //0 - 已完成， 1 - 未完成
