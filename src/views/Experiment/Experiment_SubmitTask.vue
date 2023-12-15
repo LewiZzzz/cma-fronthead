@@ -41,6 +41,13 @@
                                     提交
                                 </button>
                             </li>
+                            <li class="mb-3">
+                                标准2
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#paramDetailModal">
+                                    提交
+                                </button>
+                            </li>
                         </ul>
                     </div>
                     <div class="modal-footer">
