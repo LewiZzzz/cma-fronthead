@@ -1,6 +1,6 @@
 <template>
     <ContentBase>
-      <el-table :data='tableData' stripe style="width: 100%" height="250" :border='true' :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" >
+      <el-table :data='devices' stripe style="width: 100%" height="250" :border='true' :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" >
         <el-table-column fixed:true prop="id" label="仪器设备编号" width="180" />
         <el-table-column prop="name" label="名称" width="180" />
         <el-table-column prop="parameter" label="型号/规格/等级" width="180"/>
@@ -25,18 +25,38 @@
        components: {
            ContentBase: ContentBase,
        },
+       setup() {
+        const devices =[
+          {
+            id: 'GW001', // 设备唯一标识
+            name: '三坐标测量仪',
+            parameter: 'CONTURA 9/12/8',
+            range: '900mm*1200mm*800mm',
+            year: 2021,
+            trace: '校准',
+            expirationdate: '空',
+            source: '自购',
+          },
+        ]
+        return {
+            devices,
+        };
+       },
        data() {
        return {
-        tableData:[
-                      {id:1,name:1,parameter:1,range:1,year:1,trace:1,expirationdate:1,source:1},
-                      
-        ],
-         categoryType: 'Reference', // 用于选择使用参考分类还是自定义分类
-         customCategory: {
-           large: '',
-           category: ''
-         },
-         projectName: '', // 项目名称
+        //设备详细信息
+        deviceInfor: {
+                id: '',
+                name: '',
+                parameter: '',
+                range: '',
+                year: 0,
+                trace: '',
+                expirationdate: '',
+                source: '',
+            }, 
+      
+         
        };
      },
      methods: {
