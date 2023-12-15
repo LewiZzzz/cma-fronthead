@@ -8,7 +8,7 @@ import Experiment_director2 from '@/views/Experiment/Experiment_director2'
 import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
 import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
 import Experiment_SubmitTask from '@/views/Experiment/Experiment_SubmitTask'
-
+import Device_Management from '@/views/Device/Device_Management'
 
 const routes = [
   {
@@ -55,6 +55,11 @@ const routes = [
     path: '/experiment/submitask/',
     name: 'submitTask',
     component: Experiment_SubmitTask,
+  },
+  {
+    path: '/device/management/',
+    name: 'management',
+    component: Device_Management,
   },
 ]
 
