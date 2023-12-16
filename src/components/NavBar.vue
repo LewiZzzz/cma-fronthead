@@ -11,11 +11,10 @@
                     <li class="nav-item" v-for="(item, index) in getItemsByRole" :key="index">
                         <a class="nav-link me-2 text-white" aria-current="page" :href="item.link"
                             style="padding: 10px 10px; border-radius: 10px">{{ item.name }}</a>
-
                     </li>
                 </ul>
                 <span class="navbar-text">
-                    登录
+                    <a class="nav-link me-2 text-white" href="/login"> 登录 </a>
                 </span>
             </div>
         </div>
@@ -32,7 +31,7 @@ export default {
     },
     data() {
         return {
-            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员','设备科'], // 根据角色对应名称的数组
+            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员', '设备科'], // 根据角色对应名称的数组
             navigationItems: [
                 [
                     {
@@ -91,7 +90,7 @@ export default {
                         name: '设备管理',
                         link: '/device/management'
                     },
-                   
+
                 ],
             ],
         };

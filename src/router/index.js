@@ -8,10 +8,8 @@ import Experiment_director2 from '@/views/Experiment/Experiment_director2'
 import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
 import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
 import Experiment_SubmitTask from '@/views/Experiment/Experiment_SubmitTask'
-<<<<<<< HEAD
-=======
 import Device_Management from '@/views/Device/Device_Management'
->>>>>>> 36f2610d8de568491a83d54d5a13e45f6a1c5186
+import LoginView from '@/views/Public/LoginView'
 
 const routes = [
   {
@@ -64,6 +62,11 @@ const routes = [
     name: 'management',
     component: Device_Management,
   },
+  {
+    path: '/login/',
+    name: 'loginView',
+    component: LoginView,
+  }
 ]
 
 const router = createRouter({
