@@ -12,13 +12,30 @@
             </el-row>
 
             <el-row>
-                <el-table :data="tableData" style="width: 100%">
-                    <el-table-column label="序号" prop="id" />
+                <el-table :data="tasks" style="width: 100%">
+                    <el-table-column label="项目名称" prop="project" />
+                    <el-table-column label="标准名称" prop="standard" />
+                    <el-table-column label="项目负责人" prop="principal" />
+                    <el-table-column label="参数名称" prop="parameter" />
                     <el-table-column label="任务名称" prop="name" />
-                    <el-table-column label="任务状态" prop="status" />
+                    <el-table-column label="下达时间" prop="time" />
+                    <el-table-column label="状态">
+                            <template #default="scope">
+                                <span>{{ scope.row.state === 0 ?'待提交': (scope.row.state === 1 ? '待审核' : (scope.row.state === 2 ? '通过' : '未通过')) }}</span>
+                            </template>
+                        </el-table-column>
                     <el-table-column label="操作">
-                        <el-button size="small" type="primary" data-bs-toggle="modal" data-bs-target="#submitTask"
-                            @click="openModal()">提交</el-button>
+                        <template #default="scope">
+                                <el-button size="small" type="primary" v-if="scope.row.state === 1" data-bs-toggle="modal"
+                                    data-bs-target="#submitTask" @click="openModal()">
+                                    2
+                                </el-button>
+                                
+                                <el-button size="small" type="info" v-if="scope.row.state === 2" data-bs-toggle="modal"
+                                    data-bs-target="#submitTask"
+                                    @click="openModal()">1</el-button>
+                                
+                            </template>
                     </el-table-column>
                 </el-table>
             </el-row>
@@ -68,20 +85,114 @@ export default {
     components: {
         ContentBase,
     },
+    setup() {
+        //任务列表
+        const tasks = [
+            {
+                id: 0,  //标识
+                name: "人员",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 0
+            },
+            {
+                id: 1,  //标识
+                name: "设备",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 1
+            },
+            {
+                id: 2,  //标识
+                name: "样品",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 2
+            },
+            {
+                id: 3,  //标识
+                name: "检验细则",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 3
+            },
+            {
+                id: 4,  //标识
+                name: "设施",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 0
+            },
+            {
+                id: 5,  //标识
+                name: "比对验证",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 1
+            },
+            {
+                id: 6,  //标识
+                name: "模拟实验",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 0
+            },
+            {
+                id: 7,  //标识
+                name: "样品",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 2
+            },
+            {
+                id: 8,  //标识
+                name: "额外要求",
+                project: "项目1",
+                standard: "比较法",
+                principal: "李四",
+                parameter: "金属平均晶粒度测定方法",
+                time: "2023-01-01",
+                state: 3
+            },
+        ]
+        return {tasks,};
+    },
+
     data() {
         return {
-            tableData: [
-                {
-                    id: '1',
-                    name: '项目1',
-                    status: '待提交',
-                },
-                {
-                    id: '2',
-                    name: '项目2',
-                    status: '待提交',
-                },
-            ]
+            selectesTasks:{
+                name: '',
+                project: '',
+                standard: '',
+                principal: '',
+                parameter: '',
+                time: '',
+                status: ''
+            }
         }
     }
 }
