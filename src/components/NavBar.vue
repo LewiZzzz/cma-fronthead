@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员'], // 根据角色对应名称的数组
+            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员','设备科'], // 根据角色对应名称的数组
             navigationItems: [
                 [
                     {
@@ -85,7 +85,14 @@ export default {
                         link: '/experiment/submitask/'
                     },
                     //导航向数组针对角色4，实验科人员
-                ]
+                ],
+                [
+                    {
+                        name: '设备管理',
+                        link: '/device/management'
+                    },
+                   
+                ],
             ],
         };
     },
