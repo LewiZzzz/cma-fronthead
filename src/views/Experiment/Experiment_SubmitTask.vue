@@ -17,59 +17,428 @@
                     <el-table-column label="标准名称" prop="standard" />
                     <el-table-column label="项目负责人" prop="principal" />
                     <el-table-column label="参数名称" prop="parameter" />
-                    <el-table-column label="任务名称" prop="name" />
+                    <el-table-column label="任务名称" prop="name">
+                        <template #default="scope">
+                            <span v-if="scope.row.id === 0">{{ '人员' }}</span>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="下达时间" prop="time" />
                     <el-table-column label="状态">
-                            <template #default="scope">
-                                <span>{{ scope.row.state === 0 ?'待提交': (scope.row.state === 1 ? '待审核' : (scope.row.state === 2 ? '通过' : '未通过')) }}</span>
-                            </template>
-                        </el-table-column>
+                        <template #default="scope">
+                            <span>{{ scope.row.state === 0 ? '待提交' : (scope.row.state === 1 ? '待审核' : (scope.row.state === 2
+                                ?
+                                '通过' : '未通过')) }}</span>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="操作">
                         <template #default="scope">
-                                <el-button size="small" type="primary" v-if="scope.row.state === 1" data-bs-toggle="modal"
-                                    data-bs-target="#submitTask" @click="openModal()">
-                                    2
-                                </el-button>
-                                
-                                <el-button size="small" type="info" v-if="scope.row.state === 2" data-bs-toggle="modal"
-                                    data-bs-target="#submitTask"
-                                    @click="openModal()">1</el-button>
-                                
-                            </template>
+                            <!-- 不同的任务跳转到不同的Modal -->
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 0"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_0" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 1"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_1" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 2"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_2" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 3"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_3" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 4"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_4" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 5"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_5" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 6"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_6" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 7"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_7" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 0 && scope.row.id === 8"
+                                data-bs-toggle="modal" data-bs-target="#submitTask_8" @click="openModal()">
+                                提交
+                            </el-button>
+                            <el-button size="small" type="warning" v-if="scope.row.state === 1">审核</el-button>
+                            <el-button size="small" type="warning" v-if="scope.row.state === 2">提交</el-button>
+                            <el-button size="small" type="primary" v-if="scope.row.state === 3" data-bs-toggle="modal"
+                                data-bs-target="#examineRes" @click="openModal()">查看审核结果
+                            </el-button>
+                        </template>
                     </el-table-column>
                 </el-table>
             </el-row>
         </el-main>
 
-        <div class="modal fade" id="submitTask" tabindex="-1" aria-labelledby="submitTask" aria-hidden="true">
+        <div class="modal fade" id="submitTask_0" tabindex="-1" aria-labelledby="submitTask_0" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="submitTaskLabel">提交项目</h5>
+                        <h5 class="modal-title" id="submitTaskLabel">人员</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>标准列表：</p>
+                        <el-collapse class="mt-3">
+                            <li class="mb-3">基本信息：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                            <li class="mb-3">培训情况：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                            <li class="mb-3">考核资料：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                            <li class="mb-3">授权批准：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                        </el-collapse>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_1" tabindex="-1" aria-labelledby="submitTask_1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>设备</p>
                         <ul>
                             <li class="mb-3">
-                                标准1
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#paramDetailModal">
-                                    提交
-                                </button>
+                                仪器型号：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
-                                标准2
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#paramDetailModal">
-                                    提交
-                                </button>
+                                仪器编号：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                测量范围：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                溯源方式：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                有效日期：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                购买方式：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                仪器型号：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">计量方式：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                            <li class="mb-3">操作说明：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                            <li class="mb-3">仪器用户授权列表：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
                             </li>
                         </ul>
                     </div>
                     <div class="modal-footer">
-
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_2" tabindex="-1" aria-labelledby="submitTask_2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>设备</p>
+                        <ul>
+                            <li class="mb-3">
+                                样本名称：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                样本型号：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                样品批号：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                样品负责人：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                样品照片：
+                                <el-upload action="#" list-type="picture-card" :auto-upload="false">
+                                    <el-icon>
+                                        <Plus />
+                                    </el-icon>
+
+                                    <template #file="{ file }">
+                                        <div>
+                                            <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
+                                            <span class="el-upload-list__item-actions">
+                                                <span class="el-upload-list__item-preview"
+                                                    @click="handlePictureCardPreview(file)">
+                                                    <el-icon><zoom-in /></el-icon>
+                                                </span>
+                                                <span v-if="!disabled" class="el-upload-list__item-delete"
+                                                    @click="handleDownload(file)">
+                                                    <el-icon>
+                                                        <Download />
+                                                    </el-icon>
+                                                </span>
+                                                <span v-if="!disabled" class="el-upload-list__item-delete"
+                                                    @click="handleRemove(file)">
+                                                    <el-icon>
+                                                        <Delete />
+                                                    </el-icon>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </template>
+                                </el-upload>
+
+                                <el-dialog v-model="dialogVisible">
+                                    <img w-full :src="dialogImageUrl" alt="Preview Image" />
+                                </el-dialog>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_3" tabindex="-1" aria-labelledby="submitTask_3" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>检验细则（SOP）：</p>
+                        <ul>
+                            <li class="mb-3">检验细则：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_4" tabindex="-1" aria-labelledby="submitTask_4" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>设施：</p>
+                        <ul>
+                            <li class="mb-3">证明文件：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_5" tabindex="-1" aria-labelledby="submitTask_5" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>比对验证：</p>
+                        <ul>
+                            <li class="mb-3">证明文件：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_6" tabindex="-1" aria-labelledby="submitTask_6" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>模拟实验：</p>
+                        <ul>
+                            <li class="mb-3">实验报告：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                            <li class="mb-3">原始记录：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="submitTask_7" tabindex="-1" aria-labelledby="submitTask_7" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">提交</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>额外要求：</p>
+                        <ul>
+                            <li class="mb-3">
+                                要求名称：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">
+                                要求内容：
+                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                            </li>
+                            <li class="mb-3">要求附件：
+                                <el-upload ref="upload" class="upload-demo"
+                                    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="primary">select file</el-button>
+                                    </template>
+                                </el-upload>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交</button>
                     </div>
                 </div>
             </div>
@@ -79,6 +448,8 @@
 </template>
 <script>
 import ContentBase from '@/components/ContentBase'
+
+
 
 export default {
     name: "ExperimentSubmitTask",
@@ -106,7 +477,7 @@ export default {
                 principal: "李四",
                 parameter: "金属平均晶粒度测定方法",
                 time: "2023-01-01",
-                state: 1
+                state: 0
             },
             {
                 id: 2,  //标识
@@ -116,7 +487,7 @@ export default {
                 principal: "李四",
                 parameter: "金属平均晶粒度测定方法",
                 time: "2023-01-01",
-                state: 2
+                state: 0
             },
             {
                 id: 3,  //标识
@@ -126,7 +497,7 @@ export default {
                 principal: "李四",
                 parameter: "金属平均晶粒度测定方法",
                 time: "2023-01-01",
-                state: 3
+                state: 0
             },
             {
                 id: 4,  //标识
@@ -146,7 +517,7 @@ export default {
                 principal: "李四",
                 parameter: "金属平均晶粒度测定方法",
                 time: "2023-01-01",
-                state: 1
+                state: 0
             },
             {
                 id: 6,  //标识
@@ -160,39 +531,32 @@ export default {
             },
             {
                 id: 7,  //标识
-                name: "样品",
-                project: "项目1",
-                standard: "比较法",
-                principal: "李四",
-                parameter: "金属平均晶粒度测定方法",
-                time: "2023-01-01",
-                state: 2
-            },
-            {
-                id: 8,  //标识
                 name: "额外要求",
                 project: "项目1",
                 standard: "比较法",
                 principal: "李四",
                 parameter: "金属平均晶粒度测定方法",
                 time: "2023-01-01",
-                state: 3
+                state: 0
             },
         ]
-        return {tasks,};
+        return { tasks, };
     },
 
     data() {
         return {
-            selectesTasks:{
-                name: '',
+            selectesTasks: {
+                id: '',
+                // name: '',
                 project: '',
                 standard: '',
                 principal: '',
                 parameter: '',
                 time: '',
                 status: ''
-            }
+            },
+
+
         }
     }
 }
