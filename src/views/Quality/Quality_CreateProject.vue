@@ -246,7 +246,7 @@ export default {
       console.log(this.form);
       $.ajax({
         url: 'YOUR_BACKEND_ENDPOINT',
-        type: 'POST', //提交
+        type: 'POST', //提交 DELETE GET ..
         contentType: 'application/json', // 根据需要设置
         data: JSON.stringify(this.form), // 将 form 数据转换为 JSON 字符串
         success(response) {

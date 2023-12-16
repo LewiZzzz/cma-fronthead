@@ -47,10 +47,6 @@ export default {
                 ],
                 [
                     {
-                        name: '首页',
-                        link: '/feature1'
-                    },
-                    {
                         name: '创建项目',
                         link: '/qualitydepartment/createproject/'
                     },
@@ -85,8 +81,8 @@ export default {
                 ],
                 [
                     {
-                        name:'提交任务',
-                        link:'/experiment/submitask/'
+                        name: '提交任务',
+                        link: '/experiment/submitask/'
                     },
                     //导航向数组针对角色4，实验科人员
                 ]

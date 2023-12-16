@@ -9,7 +9,6 @@ import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
 import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
 import Experiment_SubmitTask from '@/views/Experiment/Experiment_SubmitTask'
 
-
 const routes = [
   {
     path: '/',
