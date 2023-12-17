@@ -147,33 +147,29 @@
                         <ul>
                             <li class="mb-3">
                                 仪器型号：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="equipment.model" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 仪器编号：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="equipment.number" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 测量范围：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="equipment.measuringRange" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 溯源方式：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="equipment.traceabilityMode" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 有效日期：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="equipment.effectiveDate" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 购买方式：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="equipment.buy" style="width: 240px;" placeholder="请输入" />
                             </li>
-                            <li class="mb-3">
-                                仪器型号：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
-                            </li>
-                            <li class="mb-3">计量方式：
+                            <li class="mb-3">计量证书：
                                 <el-upload ref="upload" class="upload-demo"
                                     action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
                                     :on-exceed="handleExceed" :auto-upload="false">
@@ -218,23 +214,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>设备</p>
+                        <p>样品</p>
                         <ul>
                             <li class="mb-3">
                                 样本名称：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="sample.name" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 样本型号：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="sample.mode" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 样品批号：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="sample.batch" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 样品负责人：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="sample.principal" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 样品照片：
@@ -419,11 +415,11 @@
                         <ul>
                             <li class="mb-3">
                                 要求名称：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="requirement.name" style="width: 240px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">
                                 要求内容：
-                                <el-input v-model="input" style="width: 240px;" placeholder="请输入" />
+                                <el-input v-model="requirement.content" style="width: 350x; height: 150px;" placeholder="请输入" />
                             </li>
                             <li class="mb-3">要求附件：
                                 <el-upload ref="upload" class="upload-demo"
@@ -448,7 +444,6 @@
 </template>
 <script>
 import ContentBase from '@/components/ContentBase'
-
 
 
 export default {
@@ -541,6 +536,7 @@ export default {
             },
         ]
         return { tasks, };
+
     },
 
     data() {
@@ -556,7 +552,26 @@ export default {
                 status: ''
             },
 
+            equipment : {
+            model: '',
+            number: '',
+            measuringRange: '',
+            traceabilityMode: '',
+            effectiveDate: '',
+            buy: '',
+            },
 
+            sample:{
+                name:'',
+                mode:'',
+                batch:'',
+                principal:''
+            },
+
+            requirement:{
+                name:'',
+                content:'',
+            }
         }
     }
 }
