@@ -69,10 +69,10 @@
                                 data-bs-toggle="modal" data-bs-target="#submitTask_8" @click="openModal()">
                                 提交
                             </el-button>
-                            <el-button size="small" type="warning" v-if="scope.row.state === 1">审核</el-button>
+                            <el-button size="small" type="warning" v-if="scope.row.state === 1">审核中</el-button>
                             <el-button size="small" type="warning" v-if="scope.row.state === 2">提交</el-button>
                             <el-button size="small" type="primary" v-if="scope.row.state === 3" data-bs-toggle="modal"
-                                data-bs-target="#examineRes" @click="openModal()">查看审核结果
+                                data-bs-target="#examineRes" @click="openModal()">查看审核评语
                             </el-button>
                         </template>
                     </el-table-column>
@@ -440,6 +440,23 @@
             </div>
         </div>
 
+        <div class="modal fade" id="examineRes" tabindex="-1" aria-labelledby="examineRes" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitTaskLabel">审核评语</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>审核评语</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </ContentBase>
 </template>
 <script>
@@ -472,7 +489,7 @@ export default {
                 principal: "李四",
                 parameter: "金属平均晶粒度测定方法",
                 time: "2023-01-01",
-                state: 0
+                state: 3
             },
             {
                 id: 2,  //标识
