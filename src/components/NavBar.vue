@@ -70,11 +70,15 @@ export default {
                     },
                     {
                         name: '项目分解',
-                        link: '/experimentdepartment/director1/'
+                        link: '/experiment/resolvetask/'
                     },
                     {
-                        name: '选项2',
-                        link: '/option2'
+                        name: '创建项目',
+                        link: '/qualitydepartment/createproject/'
+                    },
+                    {
+                        name: '查看项目',
+                        link: '/qualitydepartment/project/'
                     },
                     // 导航项数组针对角色3
                 ],

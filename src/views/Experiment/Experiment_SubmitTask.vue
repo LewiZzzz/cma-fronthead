@@ -578,4 +578,9 @@ export default {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.flex-content {
+    /* 保持内容在左侧 */
+    flex-grow: 1;
+}
+</style>
