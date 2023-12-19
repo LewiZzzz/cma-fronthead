@@ -1,5 +1,18 @@
 <template>
   <ContentBase>
+    <el-row>
+                <el-col :span="9">
+                    <el-form-item label="搜索">
+                        <el-input v-model="search" class="w-50 me-4" placeholder="请输入设备名称" :prefix-icon="Search">
+                        </el-input>
+                        <el-button type="primary">查询</el-button>
+                    </el-form-item>  
+                </el-col>
+                <el-col :span="9">
+                    <el-button type="primary" data-bs-toggle="modal" data-bs-target="#addModal" >
+                    新增</el-button>
+                </el-col>
+    </el-row>
     <el-table :data='equipList' stripe style="width: 100%" height="250" :border='true' :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" >
       <el-table-column fixed:true prop="projectId" label="项目编号" width="180" />
       <el-table-column prop="equipId" label="仪器设备编号" width="180" />
@@ -54,8 +67,9 @@
       </template>
     </el-table-column>
     </el-table>  
-    <el-button link type="primary" size="small" data-bs-toggle="modal" data-bs-target="#addModal" >
-                    新增</el-button>
+    <!-- 分页 -->
+    <el-pagination background layout="prev, pager, next" :total="totalEquips" :page-size="50" @current-change="fetchPagedEquips"/>
+   
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModal"
           aria-hidden="true">
           <div class="modal-dialog">
@@ -153,18 +167,21 @@
 </template>
  <script>
  import ContentBase from '@/components/ContentBase'
-import {
-ref,
-reactive,
-} from 'vue'
+ import {
+ ref,
+ reactive,
+ } from 'vue'
  import $ from 'jquery'
+ import {
+    Search,  
+ } from '@element-plus/icons-vue'
  export default {
      name: "DeviceManagement",
      components: {
          ContentBase: ContentBase,
      },
      setup() {
-
+      const search = '';
       const equipList=ref([]);
       const loadEquipList=()=>{
         $.ajax({
@@ -203,7 +220,8 @@ reactive,
           equip,
           equipList,
           loadEquipList,
-
+          search,
+          Search,
       };
      },
      data() {
