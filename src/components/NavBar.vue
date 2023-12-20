@@ -35,8 +35,8 @@ export default {
             navigationItems: [
                 [
                     {
-                        name: '项目1',
-                        link: '/project1'
+                        name: '设备管理',
+                        link: '/systemadmin/devicemanagement'
                     },
                     {
                         name: '项目2',

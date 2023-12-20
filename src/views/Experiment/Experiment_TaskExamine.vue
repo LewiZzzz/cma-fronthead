@@ -70,6 +70,8 @@
           </template>
       </el-table-column>
     </el-table>
+    <!-- 分页 -->
+    <el-pagination background layout="prev, pager, next" :total="totalTasks" :page-size="50" @current-change="fetchPagedTasks"/>
     <div class="modal fade" id="reasonModal" tabindex="-1" aria-labelledby="reasonModal"
             aria-hidden="true">
             <div class="modal-dialog">

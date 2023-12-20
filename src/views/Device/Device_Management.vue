@@ -69,7 +69,6 @@
     </el-table>  
     <!-- 分页 -->
     <el-pagination background layout="prev, pager, next" :total="totalEquips" :page-size="50" @current-change="fetchPagedEquips"/>
-   
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModal"
           aria-hidden="true">
           <div class="modal-dialog">
@@ -183,6 +182,7 @@
      setup() {
       const search = '';
       const equipList=ref([]);
+      //显示已有设备
       const loadEquipList=()=>{
         $.ajax({
           url:'',
@@ -211,9 +211,9 @@
           traceWay: '',
           validDate: '',
           equipmentSource: '',
-          qualityCertificate:'',
-          operationSpecification:'',
-          userTable:'',
+          qualityCertificate:'',//pdf路径
+          operationSpecification:'',//pdf路径
+          userTable:'',//pdf路径
        });
 
       return {
@@ -240,10 +240,10 @@
      };
    },
    methods: {
-    // 新增设备的逻辑
+    // 新增设备
      addEquip() {
       $.ajax({
-      url: '/addEquip',
+      url: '/equipment/addEquip',
       type: 'POST', //提交 DELETE GET ..
       contentType: 'application/json', // 根据需要设置
       data: JSON.stringify(this.equip), // 将 form 数据转换为 JSON 字符串

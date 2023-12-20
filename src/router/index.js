@@ -9,6 +9,7 @@ import Experiment_SubmitTask from '@/views/Experiment/Experiment_SubmitTask'
 import Experiment_ResolveTask from '@/views/Experiment/Experiment_ResolveTask'
 import Device_Management from '@/views/Device/Device_Management'
 import LoginView from '@/views/Public/LoginView'
+import SystemAdmin_DeviceManagement from '@/views/SystemAdmin/SystemAdmin_DeviceManagement'
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/login/',
     name: 'loginView',
     component: LoginView,
+  },
+  {
+    path: '/systemadmin/devicemanagement',
+    name: 'devicemanagement',
+    component: SystemAdmin_DeviceManagement,
   }
 ]
 
