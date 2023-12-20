@@ -6,7 +6,7 @@ import Quality_StandardList from '@/views/Quality/Quality_StandardList'
 import Experiment_TaskExamine from '@/views/Experiment/Experiment_TaskExamine'
 import Experiment_QueryTask from '@/views/Experiment/Experiment_QueryTask'
 import Experiment_SubmitTask from '@/views/Experiment/Experiment_SubmitTask'
-// import Experiment_ResolveTask from '@/views/Experiment/Experiment_ResolveTask'
+import Experiment_ResolveTask from '@/views/Experiment/Experiment_ResolveTask'
 import Device_Management from '@/views/Device/Device_Management'
 import LoginView from '@/views/Public/LoginView'
 import SystemAdmin_DeviceManagement from '@/views/SystemAdmin/SystemAdmin_DeviceManagement'
@@ -48,11 +48,11 @@ const routes = [
     name: 'submitTask',
     component: Experiment_SubmitTask,
   },
-  // {
-  //   path: '/experiment/resolvetask/',
-  //   name: 'resolveTask',
-  //   component: Experiment_ResolveTask,
-  // },
+  {
+    path: '/experiment/resolvetask/',
+    name: 'resolveTask',
+    component: Experiment_ResolveTask,
+  },
   {
     path: '/device/management/',
     name: 'management',
