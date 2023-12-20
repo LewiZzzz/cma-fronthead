@@ -31,15 +31,23 @@ export default {
     },
     data() {
         return {
-            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员', '设备科'], // 根据角色对应名称的数组
+            roleNames: ['系统管理员', '质量科', '实验科主任', '实验科人员', '设备科', '未登录用户'], // 根据角色对应名称的数组
             navigationItems: [
                 [
                     {
-                        name: '项目1',
+                        name: '用户管理',
                         link: '/project1'
                     },
                     {
-                        name: '项目2',
+                        name: '项目管理',
+                        link: '/project2'
+                    },
+                    {
+                        name: '标准管理',
+                        link: '/project2'
+                    },
+                    {
+                        name: '设备管理',
                         link: '/project2'
                     },
                     // 导航项数组针对角色1
@@ -94,6 +102,9 @@ export default {
                         name: '设备管理',
                         link: '/device/management'
                     },
+
+                ],
+                [
 
                 ],
             ],

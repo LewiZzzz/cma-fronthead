@@ -45,6 +45,7 @@ export default {
     setup() {
         const ruleFormRef = ref();
 
+        // 检查输入的员工号是否为空
         const checkEmployeeId = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入工号'));
@@ -53,10 +54,12 @@ export default {
             }
         };
 
+        // 检查输入的密码是否为空
         const validatePass = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else {
+                // 检查密码是否正确
                 if (ruleForm.checkPass !== '') {
                     if (!ruleFormRef.value) return;
                     ruleFormRef.value.validateField('checkPass', () => null);
@@ -65,11 +68,13 @@ export default {
             }
         };
 
+        // 创建响应式对象
         const ruleForm = reactive({
             employeeId: '',
             password: '',
         });
 
+        // 创建响应式对象
         const rules = reactive({
             password: [{
                 validator: validatePass,
@@ -81,6 +86,7 @@ export default {
             }],
         });
 
+        // 提交表单
         const submitForm = (formEl) => {
             if (!formEl) return;
             formEl.validate((valid) => {
@@ -93,13 +99,16 @@ export default {
             });
         };
 
+        // 重置表单
         const resetForm = (formEl) => {
             if (!formEl) return;
             formEl.resetFields();
         };
 
+        // 创建响应式对象
         const activeNames = ref(['1']);
 
+        // 创建响应式对象
         const handleChange = (val) => {
             console.log(val);
         };
@@ -124,11 +133,9 @@ export default {
 .center-container {
     display: flex;
     justify-content: center;
-    /* 水平居中 */
+
     align-items: center;
-    /* 垂直居中 */
     height: 80vh;
-    /* 容器高度设为视口高度 */
 }
 
 .card-header {

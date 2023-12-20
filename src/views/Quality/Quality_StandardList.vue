@@ -1,51 +1,41 @@
 <template>
     <ContentBase>
         <el-main>
-            <el-form :model="form" label-width="100px">
+            <el-form :model="form" label-width="auto">
                 <el-row>
-                    <el-col :span="5">
-                        <el-form-item label="标准大类">
-                            <el-select placeholder="请选择">
-                                <el-option label="选项1" value="option1"></el-option>
-                                <el-option label="选项2" value="option2"></el-option>
-                            </el-select>
+                    <el-col :span="12">
+                        <el-form-item label="">
+                            <el-cascader v-model="selectedClass" :options="classList" @change="filterStandards"
+                                placeholder="选择标准大类类别" filterable style="width: 400px;" />
+                            <el-button type="default" @click="resetSelection" class="ms-2">显示全部</el-button>
                         </el-form-item>
                     </el-col>
 
-                    <el-col :span="5">
-                        <el-form-item label="标准类别">
-                            <el-select placeholder="请选择">
-                                <el-option label="选项1" value="option1"></el-option>
-                                <el-option label="选项2" value="option2"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-
-                    <el-col :span="9">
-                        <el-form-item label="搜索">
-                            <el-input v-model="search" class="w-50 me-4" placeholder="查询指定标准" :prefix-icon="Search">
+                    <el-col :span="10">
+                        <el-form-item label="">
+                            <el-input v-model="search" class="w-50 me-2" placeholder="查询指定标准" :prefix-icon="Search"
+                                style="width: 200px;">
                             </el-input>
                             <el-button type="primary">查询</el-button>
-                        </el-form-item>
-                    </el-col>
 
-                    <el-col :span="5">
-                        <el-button type="primary" data-bs-toggle="modal" data-bs-target="#createStandardModal" plain>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-clipboard2-plus-fill me-1" viewBox="0 0 16 16">
-                                <path
-                                    d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z" />
-                                <path
-                                    d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5ZM8.5 6.5V8H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V9H6a.5.5 0 0 1 0-1h1.5V6.5a.5.5 0 0 1 1 0Z" />
-                            </svg>
-                            添加标准
-                        </el-button>
+                            <el-button class="ms-3" type="primary" data-bs-toggle="modal" data-bs-target="#StandardModal"
+                                plain>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-clipboard2-plus-fill me-1" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z" />
+                                    <path
+                                        d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5ZM8.5 6.5V8H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V9H6a.5.5 0 0 1 0-1h1.5V6.5a.5.5 0 0 1 1 0Z" />
+                                </svg>
+                                添加标准
+                            </el-button>
+                        </el-form-item>
                     </el-col>
 
                 </el-row>
 
                 <el-row>
-                    <el-table :data="standards" style="width: 100%">
+                    <el-table :data="filteredStandards" style="width: 100%">
                         <el-table-column label="标准创建日期" prop="createTime" />
                         <el-table-column label="标准大类" prop="className" />
                         <el-table-column label="标准类别" prop="subClassName" />
@@ -71,7 +61,7 @@
         </el-main>
     </ContentBase>
 
-    <div class="modal fade" id="createStandardModal" tabindex="-1" aria-labelledby="createStandardModal" aria-hidden="true">
+    <div class="modal fade" id="StandardModal" tabindex="-1" aria-labelledby="StandardModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,42 +69,107 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <el-upload ref="upload" class="upload-demo"
+                        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
+                        :on-exceed="handleExceed" :on-change="handleFileChange" :auto-upload="false">
+                        <template #trigger style="width: 100%;">
+                            <el-button type="primary" plain round style="width: 200px;">上传文件
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-upload ms-2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path
+                                        d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                </svg>
+                            </el-button>
+                        </template>
+                        <el-button class="ms-3" type="success" plain round @click="submitUpload" style="width: 200px;">
+                            Excel 导入 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-cloud-arrow-up-fill ms-2" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z" />
+                            </svg>
+                        </el-button>
+                        <template #tip>
+                            <div class="el-upload__tip red-text">
+                                限制上传1个文件，上传Excel文件后点击导入按钮
+                            </div>
+                        </template>
+                    </el-upload>
+
+                    <el-button class="" type="primary" data-bs-toggle="modal" data-bs-target="#createStandardModal" plain
+                        @click="resetSelection">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-clipboard2-plus-fill me-1" viewBox="0 0 16 16">
+                            <path
+                                d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z" />
+                            <path
+                                d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5ZM8.5 6.5V8H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V9H6a.5.5 0 0 1 0-1h1.5V6.5a.5.5 0 0 1 1 0Z" />
+                        </svg>
+                        手动添加
+                    </el-button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createStandardModal" tabindex="-1" aria-labelledby="createStandardModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">手动创建标准</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <el-switch v-model="categoryType" class="mb-2"
                         style="--el-switch-on-color: #13ce66; --el-switch-off-color: #0d6efd; active-color: #0d6efd"
                         active-text="参考分类" inactive-text="自定义分类" />
-                    <div v-if="categoryType === true" style="display: flex; flex-wrap: wrap;">
-                        <div class="form-group mb-3" style="display: flex; align-items: center; margin-right: 20px;">
-                            <label class="mb-2" style="margin-right: 10px;"><span class="red-text">*</span>参考大类</label>
-                            <select class="form-select" style="width: 200px;">
-                                <option value="option1">参考大类选项1</option>
-                                <option value="option2">参考大类选项2</option>
-                            </select>
+                    <el-form label-width="120px">
+                        <el-form-item v-if="categoryType === true" label="标准大类类别" required>
+                            <el-cascader v-model="selectedClass" :options="classList" placeholder="选择标准大类类别" filterable />
+                        </el-form-item>
 
-                        </div>
-                        <div class="form-group mb-3" style="display: flex; align-items: center;">
-                            <label style="margin-right: 10px;"><span class="red-text">*</span>参考类别</label>
-                            <select class="form-select" style="width: 200px;">
-                                <option value="option1">参考类别选项1</option>
-                                <option value="option2">参考类别选项2</option>
-                            </select>
-                        </div>
-                    </div>
+                        <el-form-item v-if="categoryType === false" label="自定义大类" required>
+                            <el-input v-model="customCategory.class" style="width:200px;" />
+                        </el-form-item>
 
-                    <div v-else>
-                        <div class="form-group mb-3">
-                            <label><span class="red-text">*</span>自定义大类</label>
-                            <input type="text" class="form-control" v-model="customCategory.class" style="width:200px;">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label><span class="red-text">*</span>自定义类别</label>
-                            <input type="text" class="form-control" v-model="customCategory.subclass" style="width:200px;">
-                        </div>
-                    </div>
+                        <el-form-item v-if="categoryType === false" label="自定义类别 " required>
+                            <el-input v-model="customCategory.subclass" style="width:200px;" />
+                        </el-form-item>
 
-                    <div class="form-group mb-3">
-                        <label style="text-border mb-2"><span class="red-text">*</span>标准名称</label>
-                        <input type="text" class="form-control" style="width: 400px;" v-model="projectName">
-                    </div>
+                        <el-form-item label="标准名称" required>
+                            <el-input v-model="addingStandardName" style="width:200px;" />
+                        </el-form-item>
+
+                        <el-form-item label="标准编号" required>
+                            <el-input v-model="addingStandardNumber" style="width:200px;" />
+                        </el-form-item>
+
+                        <el-form-item label="标准文件" required>
+                            <el-upload ref="upload" class="upload-demo" action="后端API" :limit="1" :on-exceed="handleExceed"
+                                :auto-upload="false">
+                                <template #trigger style="width: 100%;">
+                                    <el-button type="danger" plain style="width: 200px;">上传文件
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-upload ms-2" viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                        </svg>
+                                    </el-button>
+                                </template>
+                                <template #tip>
+                                    <div class="el-upload__tip red-text">
+                                        限制上传1个文件，上传PDF文件后点击导入按钮
+                                    </div>
+                                </template>
+                            </el-upload>
+                        </el-form-item>
+                    </el-form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
@@ -124,11 +179,17 @@
     </div>
 </template>
 
+
+
+
 <script>
 import ContentBase from '@/components/ContentBase'
 import {
     ref
 } from 'vue'
+import {
+    genFileId
+} from 'element-plus'
 
 export default {
     name: "QualityStandardList",
@@ -137,6 +198,14 @@ export default {
 
     },
     setup() {
+
+        const selectedClass = ref([]);
+
+        const handleChange = (selectedClass) => {
+            // this.selectedClassName.value = this.selectedClass.
+            console.log(selectedClass);
+        };
+
         const standards = ref([{
             id: 0,
             name: '金属平均晶粒度测定方法',
@@ -196,18 +265,127 @@ export default {
         },
         ]);
 
+        const filteredStandards = ref(standards.value);
+
+        // 筛选标准的函数
+        function filterStandards() {
+            if (selectedClass.value.length === 2) { // 确保选择了大类和子类
+                const [selectedClassName, selectedSubClassName] = selectedClass.value;
+                filteredStandards.value = standards.value.filter(standard =>
+                    standard.className === selectedClassName && standard.subClassName === selectedSubClassName
+                );
+            } else {
+                filteredStandards.value = standards.value; // 显示所有标准
+            }
+        }
+
+        // 标准类型
         var categoryType = ref(1);
-        var customCategory = ref({
+        // 标准分类
+        const customCategory = ref({
             class: "",
             subclass: "",
         });
+        // 添加标准名称
+        const addingStandardName = "";
+        // 添加标准编号
+        const addingStandardNumber = "";
+
+        // 上传文件
+        const upload = ref();
+
+        // 文件超出限制时触发的函数
+        const handleExceed = (files) => {
+            // 清除上传的文件
+            upload.value.clearFiles();
+            // 获取上传的文件
+            const file = files[0];
+            // 生成文件ID
+            file.uid = genFileId();
+            // 开始上传文件
+            upload.value.handleStart(file);
+        };
+
+        // 文件上传成功后触发的函数
+        const submitUpload = () => {
+            console.log(upload.value)
+        };
 
         return {
             standards,
             categoryType,
             customCategory,
+            handleChange,
+            selectedClass,
+            filterStandards,
+            filteredStandards,
+            handleExceed,
+            submitUpload,
+            upload,
+            addingStandardName,
+            addingStandardNumber,
         }
     },
+    data() {
+        return {
+            classList: [
+                {
+                    value: '物理性能通用要求及参数',
+                    label: '物理性能通用要求及参数',
+                    children: [
+                        {
+                            value: '金属材料',
+                            label: '金属材料',
+                        },
+                        {
+                            value: '外科金属植入物 表面质量',
+                            label: '外科金属植入物 表面质量',
+                        },
+                        {
+                            value: '医用气体和液体用小孔径连接件 胃肠道应用连接件',
+                            label: '医用气体和液体用小孔径连接件 胃肠道应用连接件',
+                        },
+                        {
+                            value: '医用气体和液体用小孔径连接件',
+                            label: '医用气体和液体用小孔径连接件',
+                        },
+                        {
+                            value: '非血管内导管',
+                            label: '非血管内导管',
+                        }
+                    ],
+                },
+            ],
+            selectedClassName: ref(''),
+            selectedSubClassName: ref(''),
+            addingClass: null,
+            addingSubClass: null,
+
+        }
+    },
+    computed: {
+        isSubclassDisabled() {
+            return !this.selectedClass;
+        },
+        isAddingSubClassDisabled() {
+            return !this.addingClass;
+        }
+    },
+    methods: {
+        resetSelection() {
+            this.selectedClass = []; // 清空选择
+            this.filterStandards(); // 重新应用筛选以显示所有标准
+        },
+        updateSubClasses() {
+            this.selectedSubclass = null;
+            console.log(this.selectedClass);
+        },
+        updateAddingSubClasses() {
+            this.addingSubClass = null;
+        },
+
+    },
+
 }
 </script>
 
