@@ -1,78 +1,100 @@
 <template>
   <ContentBase>
-    <el-table :data='projects' stripe style="width: 100%" height="250" :border='true' :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" >
+    <el-row>
+                <el-col :span="9">
+                    <el-form-item label="搜索">
+                        <el-input v-model="search" class="w-50 me-4" placeholder="请输入设备名称" :prefix-icon="Search">
+                        </el-input>
+                        <el-button type="primary">查询</el-button>
+                    </el-form-item>
+                </el-col>
+    </el-row>
+    <el-table :data='taskList' stripe style="width: 100%" height="250" :border='true' :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" >
       <el-table-column fixed:true prop="id" label="序号" width="180" />
-      <el-table-column prop="project" label="项目名称" width="280" />
+      <el-table-column prop="projectName" label="项目名称" width="280" />
       <el-table-column prop="standard" label="标准名称" width="280" />
-      <el-table-column prop="parameter" label="参数" width="280" />
-      <el-table-column  label="要求" width="280">
-        <template #default>
-          <el-button  size="small" type="info" data-bs-toggle="modal"
-                      data-bs-target="#projectRequireListModal" @click="openModal(scope.row)">
-              要求详情
-          </el-button>
-        </template>
+      <el-table-column prop="param" label="参数" width="280" />
+      <el-table-column prop="principalId" label="实验人员Id" width="280" />
+      <el-table-column prop="taskName" label="任务名称" width="280"/>
+      
+      <el-table-column label="查看任务详情">
+            <template #default="scope">
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='人员'" data-bs-toggle="modal"
+                                    data-bs-target="#paramPersonnelModal" @click="openModal(scope.row)">
+                                    详情
+                    </el-button>
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='设备'" data-bs-toggle="modal"
+                                    data-bs-target="#paramInstrumentModal" @click="openModal(scope.row)">
+                                    详情
+                    </el-button>        
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='样品'" data-bs-toggle="modal"
+                                    data-bs-target="#paramSampleModal" @click="openModal(scope.row)">
+                                    详情
+                    </el-button>
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='设施'" data-bs-toggle="modal"
+                                    data-bs-target="#paramFacilityModal" @click="openModal(scope.row)">
+                                    详情
+                    </el-button>        
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='比对验证'" data-bs-toggle="modal"
+                                    data-bs-target="#paramVerificationModal" @click="openModal(scope.row)">
+                                    详情
+                    </el-button> 
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='模拟实验'" data-bs-toggle="modal"
+                                    data-bs-target="#paramSimulationExperimentModa" @click="openModal(scope.row)">
+                                    详情
+                    </el-button>  
+                    <el-button size="small" type="primary" v-if="scope.row.taskName==='额外要求'" data-bs-toggle="modal"
+                                    data-bs-target="#paramExtraRequirementModal" @click="openModal(scope.row)">
+                                    详情
+                    </el-button>  
+                
+            </template>
       </el-table-column>
-      <el-table-column  label="审核结果" width="280" >
+      <el-table-column  label="任务状态" width="280" >
         <template #default="scope">
             <span>{{ scope.row.state === 0 ? '待审核' : (scope.row.state === 1 ? '审核未通过' : '审核通过') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" width="120">
           <template #default="scope">
-                               
-                                <el-button size="small" type="primary" v-if="scope.row.state === 1||scope.row.state === 0" >
-                                    通过</el-button>
-                                <el-button size="small" type="primary" v-if="scope.row.state === 1||scope.row.state === 0" >
-                                    不通过</el-button> 
-                                <el-button size="small" type="primary" v-else >
-                                    查看详情
+              <el-button size="small" type="primary" v-if="scope.row.state === 1||scope.row.state === 0" >
+                                    通过
+                                </el-button>
+              <el-button size="small" type="primary" v-if="scope.row.state === 0||scope.row.state === 1" data-bs-toggle="modal"
+                                    data-bs-target="#reasonModal" >
+                                    不通过
+                                </el-button> 
+               <el-button size="small" type="primary" v-else >
+                                    查看评语
                                 </el-button>
           </template>
       </el-table-column>
     </el-table>
-    <div class="modal fade" id="projectRequireListModal" tabindex="-1" aria-labelledby="projectRequireListModal"
+    <!-- 分页 -->
+    <el-pagination background layout="prev, pager, next" :total="totalTasks" :page-size="50" @current-change="fetchPagedTasks"/>
+    <div class="modal fade" id="reasonModal" tabindex="-1" aria-labelledby="reasonModal"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="projectModalLabel">项目要求列表</h5>
+                        <h5 class="modal-title" id="projectModalLabel">审核评语</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">          
-                        <p>具体要求详细信息</p>
-                        <p><span>人员</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramPersonnelModal">查看详细信息</button></p>
-                        <p><span>设备</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramInstrumentModal">查看详细信息</button></p>
-                        <p><span>样品</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramSampleModal">查看详细信息</button></p>
-                        <p><span>检验细则</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramSOPModal">查看详细信息</button></p>
-                        <p><span>设施</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramFacilityModal">查看详细信息</button></p>
-                        <p><span>比对验证</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramVerificationModal">查看详细信息</button></p>
-                        <p><span>模拟实验</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramSimulationExperimentModal">查看详细信息</button></p>
-                        <p><span>样品</span><button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                data-bs-target="#paramSampleModal">查看详细信息</button></p>
-                        <p v-for="(requirement) in this.selectedParam.extraRequirement" :key="requirement.id">
-                            <span>额外要求</span>
-                            <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                                @click="selectRequirement(requirement)" data-bs-target="#paramExtraRequirementModal">
-                                查看详细信息
-                            </button>
-                        </p>
-
+                    <div class="modal-body">
+                        <el-form :model="comment" label-width="120px">
+                            <el-form-item label="评语">
+                                <el-input v-model="comment" placeholder="" style="width: 235px"></el-input>
+                            </el-form-item>
+                        </el-form>
                     </div>
                     <div class="modal-footer">
-
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">保存</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="modal fade" id="paramPersonnelModal" tabindex="-1" aria-labelledby="paramPersonnelModal"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -82,8 +104,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <el-tag v-if="this.selectedParam.personnel.state == 0" type="success">已完成</el-tag>
-                        <el-tag v-if="this.selectedParam.personnel.state == 1" type="danger">未完成</el-tag>
+                        <!-- <el-tag v-if="this.selectedParam.personnel.state == 0" type="success">已完成</el-tag>
+                        <el-tag v-if="this.selectedParam.personnel.state == 1" type="danger">未完成</el-tag> -->
                         <br>
                         <el-collapse class="mt-3">
                             <el-collapse-item v-for="(person) in selectedParam.personnel.personnels" :key="person.id"
@@ -151,9 +173,7 @@
                         <h5 class="modal-title">具体要求: 设备</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <el-tag v-if="this.selectedParam.instrument.state == 0" type="success">已完成</el-tag>
-                        <el-tag v-if="this.selectedParam.instrument.state == 1" type="danger">未完成</el-tag>
+                    <div class="modal-body">              
                         <br>
                         <p>仪器型号：{{ this.selectedParam.instrument.modelType }}</p>
                         <p>仪器编号：{{ this.selectedParam.instrument.number }}</p>
@@ -185,9 +205,9 @@
                         <p>仪器授权用户列表：
                             <el-link type="success" :href="this.selectedParam.instrument.authorizedUserList.url">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-filetype-xlsx" viewBox="0 0 16 16">
+                                    class="bi bi-filetype-pdf" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
-                                        d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM7.86 14.841a1.13 1.13 0 0 0 .401.823c.13.108.29.192.479.252.19.061.411.091.665.091.338 0 .624-.053.858-.158.237-.105.416-.252.54-.44a1.17 1.17 0 0 0 .187-.656c0-.224-.045-.41-.135-.56a1.002 1.002 0 0 0-.375-.357 2.028 2.028 0 0 0-.565-.21l-.621-.144a.97.97 0 0 1-.405-.176.37.37 0 0 1-.143-.299c0-.156.061-.284.184-.384.125-.101.296-.152.513-.152.143 0 .266.023.37.068a.624.624 0 0 1 .245.181.56.56 0 0 1 .12.258h.75a1.093 1.093 0 0 0-.199-.566 1.21 1.21 0 0 0-.5-.41 1.813 1.813 0 0 0-.78-.152c-.293 0-.552.05-.777.15-.224.099-.4.24-.527.421-.127.182-.19.395-.19.639 0 .201.04.376.123.524.082.149.199.27.351.367.153.095.332.167.54.213l.618.144c.207.049.36.113.462.193a.387.387 0 0 1 .153.326.512.512 0 0 1-.085.29.558.558 0 0 1-.255.193c-.111.047-.25.07-.413.07-.117 0-.224-.013-.32-.04a.837.837 0 0 1-.249-.115.578.578 0 0 1-.255-.384h-.764Zm-3.726-2.909h.893l-1.274 2.007 1.254 1.992h-.908l-.85-1.415h-.035l-.853 1.415H1.5l1.24-2.016-1.228-1.983h.931l.832 1.438h.036l.823-1.438Zm1.923 3.325h1.697v.674H5.266v-3.999h.791v3.325Zm7.636-3.325h.893l-1.274 2.007 1.254 1.992h-.908l-.85-1.415h-.035l-.853 1.415h-.861l1.24-2.016-1.228-1.983h.931l.832 1.438h.036l.823-1.438Z" />
+                                        d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z" />
                                 </svg>
                                 {{ this.selectedParam.instrument.authorizedUserList.name }}
                             </el-link>
@@ -465,41 +485,73 @@
 </template>
  <script>
  import ContentBase from '@/components/ContentBase'
+ import {
+   ref,
+ //    reactive,
+ } from 'vue'
+ import $ from 'jquery'
+ import {
+    Search,  
+ } from '@element-plus/icons-vue'
  export default {
      name: "ExperimentTaskExamine",
      components: {
          ContentBase: ContentBase,
      },
      setup() {
-        const projects =[
+     
+      const taskList=ref([]);
+      const loadTaskList=()=>{
+        $.ajax({
+          url:'',
+          type:'GET',
+          dataType:'json',
+          success:(resp)=>{
+            if(resp.code===1){
+              taskList.value=resp.data;
+              console.log('获取数据成功')
+            }else{
+              console.log('获取数据失败')
+            }
+          },
+          error:(error)=>{
+            console.log(error);
+          },
+        });
+      };
+        const task =[
           {
-            id: '1',
-            project: '4',
-            standard: '5',
-            parameter: '5',  
-            require:['人员','设备'],
-            state:1,       
-            result: 0,
+            id: '',
+            projectName: '',
+            standard: '',
+            param: '',
+            taskName:'',//等同于要求         
+            state:'',  //0 1 2 状态
+            result: '',//审核结果
+            principal: '',//负责人
           },
         ]
         const search = '';
         return {
-            projects,
+            task,
             search,
+            Search,
+            taskList,
+            loadTaskList,
         };
        },
        data() {
        return {
-        //详细项目信息
-        selectedProject: {
+        //详细任务信息
+        selectedTask: {
                 id: '',
-                project: '',
+                projectName: '',
                 standard: '',
-                parameter: '',
-                require:[],         
-                state:0,  
-                result: 0,
-                
+                param: '',//参数
+                taskName:'',//等同于要求         
+                state:'',  //状态
+                comment:'',//审核评语
+                principalId:'',//实验人员Id
             }, 
         //详细参数信息    
         selectedParam: {
@@ -583,9 +635,9 @@
        console.log('Form submitted!');
        console.log(this.creationMethod);
      },
-     openModal(project) {
-            this.selectedProject = Object.assign({}, project);
-            console.log(this.selectedProject);
+     openModal(task) {
+            this.selectedTask = Object.assign({}, task);
+            console.log(this.selectedTask);
         },
      openParam(param) {
             this.selectedParam = Object.assign({}, param);
