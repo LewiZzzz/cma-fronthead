@@ -91,6 +91,16 @@ export default {
             if (!formEl) return;
             formEl.validate((valid) => {
                 if (valid) {
+                    store.dispach("login", {
+                        eId: ruleForm.employeeId,
+                        password: ruleForm.password,
+                        success() {
+                            console.log("success Login");
+                        },
+                        error() {
+                            console.log("failed Login");
+                        }
+                    });
                     console.log('submit!');
                 } else {
                     console.log('error submit!');

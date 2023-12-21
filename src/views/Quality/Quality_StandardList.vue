@@ -49,10 +49,23 @@
                         <el-table-column label="标准创建者" prop="principal" />
                         <el-table-column label="操作">
                             <template #default="scope">
-                                <el-button size="small" type="primary" data-bs-toggle="modal" data-bs-target="#projectModal"
-                                    @click="openModal(scope.row)">
-                                    查看详情
-                                </el-button>
+                                <div style="display: flex; flex-direction: column;">
+                                    <div>
+                                        <el-button v-if="scope.row.state == 0" size="small" type="warning" class="mb-2"
+                                            style="width:100%" data-bs-toggle="modal" data-bs-target="#paramModal"
+                                            @click="openModal(scope.row)">
+                                            分解参数
+                                        </el-button>
+                                    </div>
+                                    <div>
+                                        <el-button size="small" type="primary" data-bs-toggle="modal"
+                                            data-bs-target=" #projectModal" @click="openModal(scope.row)"
+                                            style="width:100%">
+                                            查看详情
+                                        </el-button>
+                                    </div>
+
+                                </div>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -60,6 +73,51 @@
             </el-form>
         </el-main>
     </ContentBase>
+
+    <div class="modal fade" id="paramModal" tabindex="-1" aria-labelledby="paramModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">创建标准</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div v-for="(param, index) in addingParams" :key="index">
+                        <el-input v-model="param.name" placeholder="请输入参数名称" style="margin-bottom: 10px;">
+                        </el-input>
+                        <el-checkbox v-model="param.facilityChecked" style="margin-bottom: 20px;">
+                            设施要求
+                        </el-checkbox>
+                        <el-checkbox v-model="param.verificationChecked" style="margin-bottom: 20px;">
+                            比对验证要求
+                        </el-checkbox>
+                        <el-checkbox v-model="param.extraRequired" @change="handleExtraRequiredChange(index)"
+                            style="margin-bottom: 10px;">
+                            增加额外要求
+                        </el-checkbox>
+                        <el-select v-if="param.extraRequired" v-model="param.extraCount" placeholder="选择额外要求数量"
+                            style="margin-bottom: 10px;">
+                            <el-option v-for="n in 8" :key="n" :label="n + '个额外要求'" :value="n">
+                            </el-option>
+                        </el-select>
+                        <div v-for="n in param.extraCount" :key="n">
+                            <el-input v-model="param.extras[n - 1].name" placeholder="要求名称" style="margin-bottom: 5px;">
+                            </el-input>
+                            <el-input v-model="param.extras[n - 1].content" type="textarea" placeholder="要求内容"
+                                style="margin-bottom: 10px;">
+                            </el-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="addParam()">添加参数</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">提交</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="modal fade" id="StandardModal" tabindex="-1" aria-labelledby="StandardModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -72,7 +130,7 @@
                     <el-upload ref="upload" class="upload-demo"
                         action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
                         :on-exceed="handleExceed" :on-change="handleFileChange" :auto-upload="false">
-                        <template #trigger style="width: 100%;">
+                        <template #trigger>
                             <el-button type="primary" plain round style="width: 200px;">上传文件
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-upload ms-2" viewBox="0 0 16 16">
@@ -151,7 +209,7 @@
                         <el-form-item label="标准文件" required>
                             <el-upload ref="upload" class="upload-demo" action="后端API" :limit="1" :on-exceed="handleExceed"
                                 :auto-upload="false">
-                                <template #trigger style="width: 100%;">
+                                <template #trigger>
                                     <el-button type="danger" plain style="width: 200px;">上传文件
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                             class="bi bi-upload ms-2" viewBox="0 0 16 16">
@@ -184,12 +242,14 @@
 
 <script>
 import ContentBase from '@/components/ContentBase'
+import $ from 'jquery'
 import {
     ref
 } from 'vue'
 import {
     genFileId
 } from 'element-plus'
+
 
 export default {
     name: "QualityStandardList",
@@ -360,7 +420,16 @@ export default {
             selectedSubClassName: ref(''),
             addingClass: null,
             addingSubClass: null,
-
+            addingParams: [
+                {
+                    name: '',
+                    facilityChecked: false,
+                    verificationChecked: false,
+                    extraRequired: false,
+                    extraCount: 0,
+                    extras: []
+                },
+            ]
         }
     },
     computed: {
@@ -383,8 +452,61 @@ export default {
         updateAddingSubClasses() {
             this.addingSubClass = null;
         },
-
+        fetchClassList() {
+            $.ajax({
+                url: 'YOUR_BACKEND_ENDPOINT/class-list', // 替换为你的后端接口 URL
+                method: 'GET',
+                success: (response) => {
+                    this.classList.value = response.classList; // 假设响应数据中有一个 classList 字段
+                },
+                error: (error) => {
+                    console.error('Error fetching class list:', error);
+                }
+            });
+        },
+        addParam() {
+            this.addingParams.push(
+                {
+                    name: '',
+                    facilityChecked: false,
+                    verificationChecked: false,
+                    extraRequired: false,
+                    extraCount: 0,
+                    extras: [],
+                });
+        },
+        updateExtras(param) {
+            while (param.extras.length < param.extraCount) {
+                param.extras.push({ name: '', content: '' });
+            }
+            while (param.extras.length > param.extraCount) {
+                param.extras.pop();
+            }
+        },
+        handleExtraRequiredChange(index) {
+            if (!this.addingParams[index].extraRequired) {
+                this.addingParams[index].extraCount = 0;
+                this.addingParams[index].extras = [];
+            }
+        },
+        submitParams() {
+            // 在这里处理参数提交的逻辑
+            console.log(this.params);
+            this.dialogVisible = false;
+        }
     },
+    watch: {
+        'addingParams': {
+            handler: function (addingParams) {
+                addingParams.forEach(param => {
+                    if (param.extraRequired) {
+                        this.updateExtras(param);
+                    }
+                });
+            },
+            deep: true
+        }
+    }
 
 }
 </script>

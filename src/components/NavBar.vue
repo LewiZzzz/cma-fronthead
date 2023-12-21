@@ -35,13 +35,8 @@ export default {
             navigationItems: [
                 [
                     {
-<<<<<<< HEAD
-                        name: '用户管理',
-                        link: '/project1'
-=======
                         name: '设备管理',
                         link: '/systemadmin/devicemanagement'
->>>>>>> 1b1b2b42b8e42b079df96c937a0ab85cadf5402f
                     },
                     {
                         name: '项目管理',
@@ -52,9 +47,9 @@ export default {
                         link: '/project2'
                     },
                     {
-                        name: '设备管理',
+                        name: '用户管理',
                         link: '/project2'
-                    },
+                    }
                     // 导航项数组针对角色1
                 ],
                 [

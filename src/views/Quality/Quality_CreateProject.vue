@@ -284,23 +284,24 @@ export default {
       this.currentPage = page || this.currentPage;
       // 调用后端 API 获取数据
       console.log("获取第" + page + "页")
-      // $.ajax({
-      //   url: 'YOUR_BACKEND_ENDPOINT',
-      //   type: 'GET',
-      //   data: {
-      //     page: this.currentPage,
-      //     pageSize: this.pageSize,
-      //     // 可以添加其他筛选参数
-      //   },
-      //   success: (response) => {
-      //     this.pagedStandards = response.standards;
-      //     this.totalStandards = response.total;
-      //   },
-      //   error: (error) => {
-      //     console.error('Error fetching paged standards:', error);
-      //   }
-      // });
+      $.ajax({
+        url: 'YOUR_BACKEND_ENDPOINT',
+        type: 'GET',
+        data: {
+          page: this.currentPage,
+          pageSize: this.pageSize,
+          // 可以添加其他筛选参数
+        },
+        success: (response) => {
+          this.pagedStandards = response.standards;
+          this.totalStandards = response.total;
+        },
+        error: (error) => {
+          console.error('Error fetching paged standards:', error);
+        }
+      });
     },
+
     fetchDirectors() {
       const self = this;
       $.ajax({
