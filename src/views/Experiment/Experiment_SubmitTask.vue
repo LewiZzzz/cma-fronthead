@@ -1,6 +1,7 @@
 <template>
     <ContentBase>
         <el-main>
+            <el-form :model="form" label-width="100px">
             <el-row>
                 <el-col :span="9">
                     <el-form-item label="搜索">
@@ -78,6 +79,7 @@
                     </el-table-column>
                 </el-table>
             </el-row>
+        </el-form>
         </el-main>
 
         <div class="modal fade" id="submitTask_0" tabindex="-1" aria-labelledby="submitTask_0" aria-hidden="true">
@@ -461,7 +463,9 @@
 </template>
 <script>
 import ContentBase from '@/components/ContentBase'
-
+import {
+    ref
+} from 'vue';
 
 export default {
     name: "ExperimentSubmitTask",
@@ -470,6 +474,9 @@ export default {
     },
     setup() {
         //任务列表
+        const form = ref({
+            category: '',
+        });
         const tasks = [
             {
                 id: 0,  //标识
@@ -552,7 +559,7 @@ export default {
                 state: 0
             },
         ]
-        return { tasks, };
+        return { tasks,form };
 
     },
 
