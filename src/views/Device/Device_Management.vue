@@ -14,7 +14,7 @@
                 </el-col>
     </el-row>
     <el-table :data='equipList' stripe style="width: 100%" height="250" :border='true' :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" >
-      <el-table-column fixed:true prop="projectId" label="项目编号" width="180" />
+      <!-- <el-table-column fixed:true prop="projectId" label="项目编号" width="180" /> -->
       <el-table-column prop="equipId" label="仪器设备编号" width="180" />
       <el-table-column prop="equipName" label="名称" width="180" />
       <el-table-column prop="specification" label="型号/规格/等级" width="180"/>
@@ -61,9 +61,9 @@
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
-      <template #default>
+      <template #default="scope">
         <el-button link type="primary" size="small" data-bs-toggle="modal" data-bs-target="#editModal" @click="openEquip(scope.row)">修改</el-button>
-        <el-button link type="primary" size="small" @click="deleteEquip(scope.row)">删除</el-button>
+        <el-button link type="primary" size="small" @click="openEquip(scope.row); deleteEquip()">删除</el-button>
       </template>
     </el-table-column>
     </el-table>  
@@ -80,9 +80,9 @@
                   </div>
                   <div class="modal-body">
                     <el-form :model="equip" label-width="120px">
-                      <el-form-item label="项目编号">
+                      <!-- <el-form-item label="项目编号">
                            <el-input v-model="equip.projectId" placeholder="" style="width: 235px"></el-input>
-                      </el-form-item>
+                      </el-form-item> -->
                       <el-form-item label="仪器设备编号">
                            <el-input v-model="equip.equipId" placeholder="" style="width: 235px"></el-input>
                       </el-form-item>
@@ -112,16 +112,79 @@
                       <el-form-item label="设备来源">
                            <el-input v-model="equip.equipmentSource" placeholder="" style="width: 235px"></el-input>
                       </el-form-item>
-                      <el-form-item label="设备计量证书">
-                        <el-upload v-model="equip.validDate" ref="upload" class="upload-demo"
+                      <el-form-item label="设备计量证书" >
+                                <el-upload ref="upload" class="upload-demo" action="后端API" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="danger" plain style="width: 200px;">上传文件
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-upload ms-2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                            </svg>
+                                        </el-button>
+                                    </template>
+                                    <template #tip>
+                                        <div class="el-upload__tip red-text">
+                                            限制上传1个文件，上传PDF文件后点击导入按钮
+                                        </div>
+                                    </template>
+                                </el-upload>
+                      </el-form-item>
+                      <!-- <el-form-item label="设备计量证书">                        
+                        <el-upload  ref="upload" class="upload-demo"
                                     action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
                                     :on-exceed="handleExceed" :auto-upload="false">
                                     <template #trigger>
                                         <el-button type="primary">选择pdf文件</el-button>
                                     </template>
                         </el-upload> 
+                      </el-form-item> -->
+                      <el-form-item label="设备计量证书" >
+                                <el-upload ref="upload" class="upload-demo" action="后端API" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="danger" plain style="width: 200px;">上传文件
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-upload ms-2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                            </svg>
+                                        </el-button>
+                                    </template>
+                                    <template #tip>
+                                        <div class="el-upload__tip red-text">
+                                            限制上传1个文件，上传PDF文件后点击导入按钮
+                                        </div>
+                                    </template>
+                                </el-upload>
                       </el-form-item>
-                      <el-form-item label="仪器操作规范">
+                      <el-form-item label="仪器操作规范" >
+                                <el-upload ref="upload" class="upload-demo" action="后端API" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="danger" plain style="width: 200px;">上传文件
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-upload ms-2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                            </svg>
+                                        </el-button>
+                                    </template>
+                                    <template #tip>
+                                        <div class="el-upload__tip red-text">
+                                            限制上传1个文件，上传PDF文件后点击导入按钮
+                                        </div>
+                                    </template>
+                                </el-upload>
+                      </el-form-item>
+                      <!-- <el-form-item label="仪器操作规范">
                         <el-upload ref="upload" class="upload-demo"
                                     action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
                                     :on-exceed="handleExceed" :auto-upload="false">
@@ -129,8 +192,29 @@
                                         <el-button type="primary">选择pdf文件</el-button>
                                     </template>
                         </el-upload> 
+                      </el-form-item> -->
+                      <el-form-item label="仪器授权使用人员一览表" >
+                                <el-upload ref="upload" class="upload-demo" action="后端API" :limit="1"
+                                    :on-exceed="handleExceed" :auto-upload="false">
+                                    <template #trigger>
+                                        <el-button type="danger" plain style="width: 200px;">上传文件
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-upload ms-2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                            </svg>
+                                        </el-button>
+                                    </template>
+                                    <template #tip>
+                                        <div class="el-upload__tip red-text">
+                                            限制上传1个文件，上传PDF文件后点击导入按钮
+                                        </div>
+                                    </template>
+                                </el-upload>
                       </el-form-item>
-                      <el-form-item label="仪器授权使用人员一览表"  >
+                      <!-- <el-form-item label="仪器授权使用人员一览表"  >
                         <el-upload ref="upload" class="upload-demo"
                                     action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :limit="1"
                                     :on-exceed="handleExceed" :auto-upload="false">
@@ -138,7 +222,7 @@
                                         <el-button type="primary">选择pdf文件</el-button>
                                     </template>
                         </el-upload> 
-                      </el-form-item>
+                      </el-form-item> -->
                       <el-form-item>
                         <el-button type="primary" @click="addEquip">提交</el-button>
                       </el-form-item>
@@ -174,9 +258,9 @@
                   </div>
                   <div class="modal-body">
                     <el-form :model="equip" label-width="120px">
-                      <el-form-item label="项目编号">
+                      <!-- <el-form-item label="项目编号">
                            <el-input v-model="equip.projectId" placeholder="{{ this.selectedEquip.equipId}}" style="width: 235px"></el-input>
-                      </el-form-item>
+                      </el-form-item> -->
                       <el-form-item label="仪器设备编号">
                            <el-input v-model="equip.equipId" placeholder="" style="width: 235px"></el-input>
                       </el-form-item>
@@ -280,7 +364,7 @@
       //显示已有设备
       const loadEquipList=()=>{
         $.ajax({
-          url:'',
+          url:'http://localhost:8080/equipment/list',
           type:'GET',
           dataType:'json',
           success:(resp)=>{
@@ -296,7 +380,10 @@
           },
         });
       };
-      const equip =reactive({
+
+      loadEquipList();
+
+      const equip = reactive({
           projectId:0,
           equipId: '', // 设备唯一标识
           equipName: '',
@@ -342,10 +429,24 @@
     // 新增设备
      addEquip() {
       $.ajax({
-      url: '/equipment/addEquip',
+      url: 'http://localhost:8080/equipment/addEquip',
       type: 'POST', //提交 DELETE GET ..
       contentType: 'application/json', // 根据需要设置
-      data: JSON.stringify(this.equip), // 将 form 数据转换为 JSON 字符串
+      data: JSON.stringify({
+        "equipId": this.equip.equipId,
+    "equipName": this.equip.equipName,
+    "specification": this.equip.specification,
+    "measureRange": this.equip.measureRange,
+    "purchaseYear": this.equip.purchaseYear,
+    "traceWay": this.equip.traceWay,
+    "validDate":this.equip.validDate,
+    " equipmentSource":this.equip. equipmentSource,
+
+          equipmentSource: '',
+          qualityCertificate:'',//pdf路径
+          operationSpecification:'',//pdf路径
+          userTable:'',//pdf路径
+      }), // 将 form 数据转换为 JSON 字符串
       success(response) {
         // 处理成功响应
         console.log('Form submitted successfully:', response);
@@ -355,14 +456,12 @@
         console.error('Error submitting form:', textStatus, errorThrown);
       }
     });
-       // 可以在这里处理表单提交的操作
-       console.log('Form submitted!');
      },
     //删除设备 
     deleteEquip(){
     const equipId=this.selectedEquip.equipId; 
     $.ajax({
-      url: '/equipment/deleteEquip'+equipId,
+      url: 'http://localhost:8080/equipment/deleteEquip/'+equipId,
       type: 'DELETE', //提交 DELETE GET ..
       // contentType: 'application/json', // 根据需要设置
       // data: JSON.stringify(this.equip), 
@@ -381,7 +480,6 @@
     },
     //编辑设备
     modifyEquip() {
-      
       const editedEquipName=this.selectedEquip.equipName;
       const editedEquip={
         title:editedEquipName,

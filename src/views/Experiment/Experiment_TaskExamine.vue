@@ -17,7 +17,7 @@
       <el-table-column prop="principalId" label="实验人员Id" width="280" />
       <el-table-column prop="taskName" label="任务名称" width="280"/>
       
-      <el-table-column label="查看任务详情">
+      <el-table-column label="查看任务详情" width="280">
             <template #default="scope">
                     <el-button size="small" type="primary" v-if="scope.row.taskName==='人员'" data-bs-toggle="modal"
                                     data-bs-target="#paramPersonnelModal" @click="openModal(scope.row)">
@@ -50,7 +50,7 @@
                 
             </template>
       </el-table-column>
-      <el-table-column  label="任务状态" width="280" >
+      <el-table-column  label="任务状态" width="200" >
         <template #default="scope">
             <span>{{ scope.row.state === 0 ? '待审核' : (scope.row.state === 1 ? '审核未通过' : '审核通过') }}</span>
         </template>
